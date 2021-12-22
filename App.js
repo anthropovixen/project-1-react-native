@@ -9,16 +9,11 @@ const App = () => {
 	};
 
 	return (
-		<View
-			style={{
-				flex: 1,
-				backgroundColor: 'darkred',
-				alignItems: 'center',
-				justifyContent: 'center',
-			}}
-		>
+		<View style={styles.body}>
 			<Text style={styles.text}>{name}</Text>
-			<Button title="Update State" onPress={onClickHandler}></Button>
+			<View style={styles.button}>
+				<Button title="Update State" onPress={onClickHandler}></Button>
+			</View>
 		</View>
 	);
 };
@@ -29,12 +24,20 @@ const styles = StyleSheet.create({
 		backgroundColor: 'darkred',
 		alignItems: 'center',
 		justifyContent: 'center',
+		borderWidth: 10,
+		borderColor: '#ff00ff',
+		borderRadius: 10,
 	},
 	text: {
 		color: '#ffffff',
-		fontSize: 20,
+		fontSize: 40,
 		fontStyle: 'italic',
 		margin: 10,
+		textTransform: 'uppercase',
+	},
+	button: {
+		width: 200,
+		height: 60,
 	},
 });
 

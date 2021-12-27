@@ -1,25 +1,50 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Linking } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	ScrollView,
+	RefreshControl,
+} from 'react-native';
 
 const App = () => {
-	const [name, setName] = useState('Styling Test');
+	const [Items, setItems] = useState([
+		{ key: 1, item: 'Item 1' },
+		{ key: 2, item: 'Item 2' },
+		{ key: 3, item: 'Item 3' },
+		{ key: 4, item: 'Item 4' },
+		{ key: 5, item: 'Item 5' },
+		{ key: 6, item: 'Item 6' },
+		{ key: 7, item: 'Item 7' },
+		{ key: 8, item: 'Item 8' },
+	]);
+	const [Refreshing, setRefreshing] = useState(false);
 
-	const onClickHandler = () => {
-		setName('Style Test Done!');
+	const onRefresh = () => {
+		setRefreshing(true);
+		setItems([...Items, { key: 69, item: 'Item 69' }]);
+		setRefreshing(false);
 	};
 
 	return (
-		<View style={styles.body}>
-			<View style={styles.view1}>
-				<Text style={styles.text}>1</Text>
-			</View>
-			<View style={styles.view2}>
-				<Text style={styles.text}>2</Text>
-			</View>
-			<View style={styles.view3}>
-				<Text style={styles.text}>3</Text>
-			</View>
-		</View>
+		<ScrollView
+			style={styles.body}
+			refreshControl={
+				<RefreshControl
+					refreshing={Refreshing}
+					onRefresh={onRefresh}
+					colors={['#ff00ff']}
+				/>
+			}
+		>
+			{Items.map((object) => {
+				return (
+					<View style={styles.item} key={object.key}>
+						<Text style={styles.text}>{object.item}</Text>
+					</View>
+				);
+			})}
+		</ScrollView>
 	);
 };
 
@@ -27,31 +52,17 @@ const styles = StyleSheet.create({
 	body: {
 		flex: 1,
 		flexDirection: 'column',
-		backgroundColor: 'darkred',
-		alignItems: 'stretch',
-		justifyContent: 'center',
+		backgroundColor: '#ffffff',
 	},
-	view1: {
-		flex: 1,
-		backgroundColor: 'white',
-		alignItems: 'center',
+	item: {
+		margin: 10,
+		backgroundColor: 'beige',
 		justifyContent: 'center',
-	},
-	view2: {
-		flex: 1,
-		backgroundColor: 'green',
 		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	view3: {
-		flex: 1,
-		backgroundColor: 'yellow',
-		alignItems: 'center',
-		justifyContent: 'center',
 	},
 	text: {
 		color: 'black',
-		fontSize: 40,
+		fontSize: 48,
 		fontStyle: 'italic',
 		margin: 10,
 	},

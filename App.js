@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
 const App = () => {
 	const [name, SetName] = useState('');
+	const [submitted, SetSubmitted] = useState(false);
+	const onPressHandler = () => {
+		SetSubmitted(!submitted);
+	};
 
 	return (
 		<View style={styles.body}>
@@ -17,7 +21,15 @@ const App = () => {
 				// secureTextEntry
 				maxLength={20}
 			/>
-			<Text style={styles.text}>Your name is: {name}</Text>
+			<Button
+				title={submitted ? 'Clear' : 'Submit'}
+				onPress={onPressHandler}
+				color="green"
+				// disabled={submitted}
+			/>
+			{submitted ? (
+				<Text style={styles.text}>You are registered as {name}</Text>
+			) : null}
 		</View>
 	);
 };
@@ -41,6 +53,7 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		textAlign: 'center',
 		fontSize: 20,
+		margin: 50,
 	},
 });
 

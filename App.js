@@ -8,6 +8,7 @@ import {
 	TouchableOpacity,
 	TouchableHighlight,
 	TouchableWithoutFeedback,
+	Pressable,
 } from 'react-native';
 
 const App = () => {
@@ -36,11 +37,25 @@ const App = () => {
 				color="green"
 				// disabled={submitted}
 			/> */}
-			<TouchableWithoutFeedback onPress={onPressHandler}>
+			{/* <TouchableWithoutFeedback onPress={onPressHandler}>
 				<View style={styles.button}>
 					<Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
 				</View>
-			</TouchableWithoutFeedback>
+			</TouchableWithoutFeedback> */}
+			<Pressable
+				onPress={onPressHandler}
+				// onLongPress={onPressHandler}
+				// delayLongPress={2000}
+				// disabled={submitted}
+				hitSlop={{ top: 10, bottom: 10, right: 10, left: 10 }}
+				android_ripple={{ color: 'yellow' }}
+				style={({ pressed }) => [
+					{ backgroundColor: pressed ? 'pink' : 'green' },
+					styles.button,
+				]}
+			>
+				<Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+			</Pressable>
 
 			{submitted ? (
 				<Text style={styles.text}>You are registered as {name}</Text>
@@ -73,7 +88,6 @@ const styles = StyleSheet.create({
 	button: {
 		width: 150,
 		height: 50,
-		backgroundColor: 'green',
 		alignItems: 'center',
 	},
 });

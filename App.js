@@ -7,6 +7,7 @@ import {
 	Button,
 	TouchableOpacity,
 	TouchableHighlight,
+	TouchableWithoutFeedback,
 } from 'react-native';
 
 const App = () => {
@@ -35,14 +36,11 @@ const App = () => {
 				color="green"
 				// disabled={submitted}
 			/> */}
-			<TouchableHighlight
-				style={styles.button}
-				onPress={onPressHandler}
-				activeOpacity={0.5}
-				underlayColor="pink"
-			>
-				<Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-			</TouchableHighlight>
+			<TouchableWithoutFeedback onPress={onPressHandler}>
+				<View style={styles.button}>
+					<Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+				</View>
+			</TouchableWithoutFeedback>
 
 			{submitted ? (
 				<Text style={styles.text}>You are registered as {name}</Text>

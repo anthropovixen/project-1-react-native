@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	TextInput,
+	Button,
+	TouchableOpacity,
+} from 'react-native';
 
 const App = () => {
 	const [name, SetName] = useState('');
@@ -21,12 +28,20 @@ const App = () => {
 				// secureTextEntry
 				maxLength={20}
 			/>
-			<Button
+			{/* <Button
 				title={submitted ? 'Clear' : 'Submit'}
 				onPress={onPressHandler}
 				color="green"
 				// disabled={submitted}
-			/>
+			/> */}
+			<TouchableOpacity
+				style={styles.button}
+				onPress={onPressHandler}
+				activeOpacity={0.5}
+			>
+				<Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
+			</TouchableOpacity>
+
 			{submitted ? (
 				<Text style={styles.text}>You are registered as {name}</Text>
 			) : null}
@@ -54,6 +69,12 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 20,
 		margin: 50,
+	},
+	button: {
+		width: 150,
+		height: 50,
+		backgroundColor: 'green',
+		alignItems: 'center',
 	},
 });
 

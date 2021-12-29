@@ -6,6 +6,7 @@ import {
 	TextInput,
 	Button,
 	TouchableOpacity,
+	TouchableHighlight,
 } from 'react-native';
 
 const App = () => {
@@ -34,13 +35,14 @@ const App = () => {
 				color="green"
 				// disabled={submitted}
 			/> */}
-			<TouchableOpacity
+			<TouchableHighlight
 				style={styles.button}
 				onPress={onPressHandler}
 				activeOpacity={0.5}
+				underlayColor="pink"
 			>
 				<Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-			</TouchableOpacity>
+			</TouchableHighlight>
 
 			{submitted ? (
 				<Text style={styles.text}>You are registered as {name}</Text>

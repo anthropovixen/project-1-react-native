@@ -9,13 +9,36 @@ import {
 	TouchableHighlight,
 	TouchableWithoutFeedback,
 	Pressable,
+	Alert,
 } from 'react-native';
 
 const App = () => {
 	const [name, SetName] = useState('');
 	const [submitted, SetSubmitted] = useState(false);
 	const onPressHandler = () => {
-		SetSubmitted(!submitted);
+		if (name.length > 3) {
+			SetSubmitted(!submitted);
+		} else {
+			Alert.alert(
+				'Warning',
+				'The name must be longer than 3 characters',
+				[
+					{
+						text: 'Do not show again',
+						onPress: () => console.warn('Do not show Pressed!'),
+					},
+					{
+						text: 'Cancel',
+						onPress: () => console.warn('Cancel Pressed!'),
+					},
+					{
+						text: 'OK',
+						onPress: () => console.warn('OK Pressed!'),
+					},
+				],
+				{ cancelable: true, onDismiss: () => console.warn('Alert dismissed!') }
+			);
+		}
 	};
 
 	return (
@@ -29,7 +52,7 @@ const App = () => {
 				// keyboardType='numeric'
 				// editable={false}
 				// secureTextEntry
-				maxLength={20}
+				// maxLength={20}
 			/>
 			{/* <Button
 				title={submitted ? 'Clear' : 'Submit'}

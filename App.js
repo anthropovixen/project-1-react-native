@@ -10,6 +10,7 @@ import {
 	TouchableWithoutFeedback,
 	Pressable,
 	Alert,
+	ToastAndroid,
 } from 'react-native';
 
 const App = () => {
@@ -19,24 +20,29 @@ const App = () => {
 		if (name.length > 3) {
 			SetSubmitted(!submitted);
 		} else {
-			Alert.alert(
-				'Warning',
+			// Alert.alert(
+			// 	'Warning',
+			// 	'The name must be longer than 3 characters',
+			// 	[
+			// 		{
+			// 			text: 'Do not show again',
+			// 			onPress: () => console.warn('Do not show Pressed!'),
+			// 		},
+			// 		{
+			// 			text: 'Cancel',
+			// 			onPress: () => console.warn('Cancel Pressed!'),
+			// 		},
+			// 		{
+			// 			text: 'OK',
+			// 			onPress: () => console.warn('OK Pressed!'),
+			// 		},
+			// 	],
+			// 	{ cancelable: true, onDismiss: () => console.warn('Alert dismissed!') }
+			// );
+			ToastAndroid.showWithGravity(
 				'The name must be longer than 3 characters',
-				[
-					{
-						text: 'Do not show again',
-						onPress: () => console.warn('Do not show Pressed!'),
-					},
-					{
-						text: 'Cancel',
-						onPress: () => console.warn('Cancel Pressed!'),
-					},
-					{
-						text: 'OK',
-						onPress: () => console.warn('OK Pressed!'),
-					},
-				],
-				{ cancelable: true, onDismiss: () => console.warn('Alert dismissed!') }
+				ToastAndroid.LONG,
+				ToastAndroid.CENTER
 			);
 		}
 	};
@@ -48,28 +54,9 @@ const App = () => {
 				style={styles.input}
 				placeholder="e.g. Maria"
 				onChangeText={(value) => SetName(value)}
-				// multiline
-				// keyboardType='numeric'
-				// editable={false}
-				// secureTextEntry
-				// maxLength={20}
 			/>
-			{/* <Button
-				title={submitted ? 'Clear' : 'Submit'}
-				onPress={onPressHandler}
-				color="green"
-				// disabled={submitted}
-			/> */}
-			{/* <TouchableWithoutFeedback onPress={onPressHandler}>
-				<View style={styles.button}>
-					<Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-				</View>
-			</TouchableWithoutFeedback> */}
 			<Pressable
 				onPress={onPressHandler}
-				// onLongPress={onPressHandler}
-				// delayLongPress={2000}
-				// disabled={submitted}
 				hitSlop={{ top: 10, bottom: 10, right: 10, left: 10 }}
 				android_ripple={{ color: 'yellow' }}
 				style={({ pressed }) => [

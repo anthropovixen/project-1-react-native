@@ -6,6 +6,8 @@ import {
 	TextInput,
 	Pressable,
 	Modal,
+	Image,
+	ImageBackground,
 } from 'react-native';
 
 const App = () => {
@@ -21,7 +23,8 @@ const App = () => {
 	};
 
 	return (
-		<View style={styles.body}>
+		<ImageBackground style={styles.body}
+		source={{ uri: 'https://images.unsplash.com/photo-1547514701-42782101795e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80'}}>
 			<Modal
 				visible={showWarning}
 				transparent
@@ -66,11 +69,25 @@ const App = () => {
 			>
 				<Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
 			</Pressable>
-
 			{submitted ? (
-				<Text style={styles.text}>You are registered as {name}</Text>
-			) : null}
-		</View>
+				<View style={styles.body}>
+					<Text style={styles.text}>You are registered as {name}</Text>
+					<Image
+						style={styles.image}
+						source={require('./assets/done.png')}
+						resizeMode="stretch"
+						
+					/>
+				</View>
+			) : (
+				<Image
+					style={styles.image}
+					source={require('./assets/error.png')}
+					resizeMode="stretch"
+					blurRadius={5}
+				/>
+			)}
+		</ImageBackground>
 	);
 };
 
@@ -132,6 +149,11 @@ const styles = StyleSheet.create({
 		backgroundColor: '#4fa729',
 		borderBottomLeftRadius: 20,
 		borderBottomRightRadius: 20,
+	},
+	image: {
+		width: 100,
+		height: 100,
+		margin: 10,
 	},
 });
 
